@@ -1,13 +1,16 @@
-// pages/products.js
 import React from 'react';
 import Link from 'next/link';
 
 import products from './product.json'
+import NavBar from './components/nav/nav';
+import MyCarousel from './components/nav/Carousel';
 
 
 function ProductsPage() {
   return (
     <div>
+    <NavBar/>
+    <MyCarousel/>
       <h1 className="text-3xl font-bold mb-4">Welcome to our E-commerce Store</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {products.map((product) => (
