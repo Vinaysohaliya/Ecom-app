@@ -25,6 +25,7 @@ function Cart() {
           >
             Remove
           </button>
+          <div>{product.quantity}</div>
         </div>
       ))}
     </div>
