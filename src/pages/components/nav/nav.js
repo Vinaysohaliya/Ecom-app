@@ -17,10 +17,10 @@ const NavBar = () => {
           <Link href="/baby">Baby Collection</Link>
         </li>
         <li className="mx-2">
-          <Link href="/about">About Us</Link>
+          <Link href="/aboutus">About Us</Link>
         </li>
         <li className="mx-2">
-          <Link href="/contact">Contact Us</Link>
+          <Link href="/contactus">Contact Us</Link>
         </li>
         <li className="mx-2">
           <Link href="/cartItem">cart</Link>

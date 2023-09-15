@@ -4,7 +4,6 @@ import Link from 'next/link';
 import products from './product.json'
 import CategoryData from './category.json';
 
-import NavBar from './components/nav/nav';
 import ProductCard from './components/productCard'
 import CategoryCard from './components/category/categoryCard';
 
@@ -12,7 +11,6 @@ import CategoryCard from './components/category/categoryCard';
 function ProductsPage() {
   return (
     <div>
-      <NavBar />
 
 
       <div className='flex justify-evenly my-10'>

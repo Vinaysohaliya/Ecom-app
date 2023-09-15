@@ -1,12 +1,13 @@
-// [productid].js (inside pages directory)
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from '../../Redux/cart/cartSlice';
 import products from '../product.json';
 import { useRouter } from 'next/router';
-import Link from 'next/link'; // Import the Link component
-
+import Link from 'next/link';
 function ProductDetailPage() {
+
+
+
     const dispatch = useDispatch();
     const router = useRouter();
 
@@ -34,16 +35,15 @@ function ProductDetailPage() {
                         Add to Cart
                     </button>
 
-                    {/* Link to the cart page */}
                     <Link href="/cartItem" className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 mt-2 rounded">
                         Go to Cart
                     </Link>
+                    <div>{}</div>
                 </div>
             </div>
         );
     }
 
-    // If the product doesn't exist (invalid ID), display a message or redirect to an error page
     return (
         <div>
             <h1 className="text-3xl font-bold mb-4">Product not found</h1>
