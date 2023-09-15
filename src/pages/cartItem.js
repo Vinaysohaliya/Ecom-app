@@ -3,12 +3,15 @@ import { removeFromCart } from '../Redux/cart/cartSlice';
 
 
 function Cart() {
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart.item);
+  const carttotal = useSelector((state) => state.cart.total);
+
   const dispatch = useDispatch();
 
   const handleRemoveFromCart = (product) => {
     dispatch(removeFromCart(product));
   };
+
 
   return (
     <div>
@@ -28,6 +31,11 @@ function Cart() {
           <div>{product.quantity}</div>
         </div>
       ))}
+      <div>
+        		
+Subtotal
+{carttotal}
+      </div>
     </div>
   );
 }
