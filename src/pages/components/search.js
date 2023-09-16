@@ -23,7 +23,7 @@ const Search = () => {
     const handleSearch = (query) => {
         const trimmedQuery = query.trim().toLowerCase();
         if (trimmedQuery === '') {
-            setFilteredProducts(products); // Reset to all products if the query is empty
+            setFilteredProducts(null); // Reset to all products if the query is empty
         } else {
             const matchingProducts = products.filter((product) =>
                 product.name.toLowerCase().includes(trimmedQuery)

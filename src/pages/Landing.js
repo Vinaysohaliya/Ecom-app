@@ -30,11 +30,11 @@ function ProductsPage() {
         <h1 className="text-3xl font-bold m-7 text-center">
           Welcome to our E-commerce Store
         </h1>
-        <div className="flex justify-evenly my-10 gap-4 ">
+        <div className="flex items-center justify-evenly my-10 gap-4 box-border flex-wrap">
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-white p-4 rounded-lg shadow-md"
+              className="bg-white p-4 rounded-lg shadow-md  "
             >
               <Link href={`/product/${product.id}`}>
                 <ProductCard product={product} />

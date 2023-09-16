@@ -4,13 +4,12 @@ import Link from 'next/link';
 
 function ProductList({ products }) {
     const [sortedProducts, setSortedProducts] = useState(products);
-    const [categery, setcategery] = useState('');
 
     
 
     const handleSortChange = (e) => {
         const sortType = e.target.value;
-        let newSortedProducts = [...products];
+        let newSortedProducts = [...sortedProducts];
 
         if (sortType === 'asc') {
             newSortedProducts.sort((a, b) => a.price - b.price);
@@ -23,7 +22,6 @@ function ProductList({ products }) {
      
     function handleCategoty(e) {
         const categery=e.target.value;
-        setcategery(categery);
 
         if (categery=='All') {
             setSortedProducts(products)
@@ -51,8 +49,8 @@ function ProductList({ products }) {
 
 
 
-            <div className=' flex'>
-                <div className="flex justify-evenly my-10 gap-4 ">
+            <div className=' flex '>
+                <div className="flex justify-evenly my-10 gap-4 flex-wrap">
                     {sortedProducts.map((product) => (
                         <div key={product.id} className="bg-white p-4 rounded-lg shadow-md">
                             <Link href={`/product/${product.id}`}>
