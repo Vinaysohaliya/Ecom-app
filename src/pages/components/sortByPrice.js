@@ -6,6 +6,8 @@ function ProductList({ products }) {
     const [sortedProducts, setSortedProducts] = useState(products);
     const [categery, setcategery] = useState('');
 
+    
+
     const handleSortChange = (e) => {
         const sortType = e.target.value;
         let newSortedProducts = [...products];

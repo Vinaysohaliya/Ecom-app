@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Search from '../search';
 
 const NavBar = () => {
   return (
@@ -26,6 +27,7 @@ const NavBar = () => {
           <Link href="/cartItem">cart</Link>
         </li>
       </ul>
+      <Search/>
     </nav>
   );
 };
