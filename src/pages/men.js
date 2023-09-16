@@ -10,7 +10,7 @@ const MenPage = () => {
 
   return (
     <div className=' flex'>
-      <ProductList products={products}/>
+      <ProductList/>
     </div>
   );
 };

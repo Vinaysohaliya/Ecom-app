@@ -18,10 +18,6 @@ function Checkout() {
   return (
     <div>
       <h2 className="text-3xl font-bold mb-4 flex items-center justify-center">Your Shopping Cart</h2>
-      <Head>
-      <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/>
-      </Head>
-      <Script type="application/javascript" src={`{HOST}/merchantpgpui/checkoutjs/merchants/${}.js`} onload="onScriptLoad();" crossorigin="anonymous"/>
       {cart.map((product) => (
         <div key={product.id} className="bg-white p-4 rounded-lg shadow-md w-1/4">
           <img src={product.imageUrl} alt={product.name} className="w-full h-40 object-cover rounded" />

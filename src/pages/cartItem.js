@@ -34,9 +34,9 @@ function Cart() {
       ))}
       <Link href='/checkout'>Checkout</Link>
       <div>
-        		
-Subtotal
-{carttotal}
+
+        Subtotal
+        {carttotal}
       </div>
     </div>
   );

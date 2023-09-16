@@ -1,36 +1,31 @@
 import Link from 'next/link';
-import products from '../product.json'
+import { handleSearch,setsearch } from '@/Redux/search/searchSlice';
 import React, { useState } from 'react'
 import ProductCard from './productCard';
 import { useRouter } from 'next/router';
+import { useDispatch,useSelector } from 'react-redux';
 
 const Search = () => {
 
-    const [search, setsearch] = useState('');
-    const [FilteredProducts, setFilteredProducts] = useState(null);
-    console.log(FilteredProducts);
-    const router=useRouter();
+    const search = useSelector((state) => state.search.search);
+    const FilteredProducts = useSelector((state) => state.search.FilteredProducts);
+
+    const dispatch = useDispatch();
+
+
+
+    const router = useRouter();
 
 
     function handelSearchchange(e) {
         const query = e.target.value;
-        setsearch(query);
-        handleSearch(query);
+        dispatch(setsearch(query))
+        dispatch(handleSearch(query))
     }
-    
 
 
-    const handleSearch = (query) => {
-        const trimmedQuery = query.trim().toLowerCase();
-        if (trimmedQuery === '') {
-            setFilteredProducts(null); // Reset to all products if the query is empty
-        } else {
-            const matchingProducts = products.filter((product) =>
-                product.name.toLowerCase().includes(trimmedQuery)
-            );
-            setFilteredProducts(matchingProducts);
-        }
-    };
+
+
 
     return (
         <div>

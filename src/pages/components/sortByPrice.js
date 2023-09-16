@@ -1,34 +1,27 @@
 import { useState } from 'react';
 import ProductCard from './productCard';
 import Link from 'next/link';
+import { useDispatch,useSelector } from 'react-redux';
+import { handleSort,handleCategory } from '../../Redux/sorting/sort';
 
-function ProductList({ products }) {
-    const [sortedProducts, setSortedProducts] = useState(products);
+
+
+function ProductList() {
+   const dispatch=useDispatch()
+
+   const sortedProducts=useSelector((state)=>state.sort.sortedProducts)
+
 
     
 
     const handleSortChange = (e) => {
         const sortType = e.target.value;
-        let newSortedProducts = [...sortedProducts];
-
-        if (sortType === 'asc') {
-            newSortedProducts.sort((a, b) => a.price - b.price);
-        } else if (sortType === 'desc') {
-            newSortedProducts.sort((a, b) => b.price - a.price);
-        }
-
-        setSortedProducts(newSortedProducts);
+        dispatch(handleSort(sortType)); // Dispatch with the desired sort type ('asc' or 'desc')
     };
      
-    function handleCategoty(e) {
+    function handleCategotychange(e) {
         const categery=e.target.value;
-
-        if (categery=='All') {
-            setSortedProducts(products)
-        }else{
-            const categeryProducts=products.filter((p)=>p.category==categery)
-            setSortedProducts(categeryProducts)
-        }
+        dispatch(handleCategory(categery))
     }
 
     return (
@@ -41,7 +34,7 @@ function ProductList({ products }) {
             </select>
 
             <label htmlFor="sort">Select Cetegory</label>
-            <select id="sort" onChange={handleCategoty}>
+            <select id="sort" onChange={handleCategotychange}>
                 <option value='All'>All</option>
                 <option value="Clothing">Clothing</option>
                 <option value="Electronics">Electronics</option>
