@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import products from '../../pages/product.json';
 
-//pending
 const sortSlice = createSlice({
   name: 'sort',
   initialState: {

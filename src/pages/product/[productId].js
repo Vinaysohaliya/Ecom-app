@@ -24,7 +24,6 @@ function ProductDetailPage() {
         .get(`/api/products/${productId}`)
         .then((response) => {
           setProduct(response.data);
-          console.log("hi");
           setLoading(false);
         })
         .catch((error) => {
