@@ -16,12 +16,22 @@
     "eslint-config-next": "13.4.19",
     "firebase": "^10.4.0",
     "mongoose": "^7.5.2",
+    "net": "^1.0.2",
     "next": "13.4.19",
     "postcss": "8.4.29",
+    "razorpay": "^2.9.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.1.2",
     "react-responsive-carousel": "^3.2.23",
-    "tailwindcss": "3.3.3"
+    "tailwindcss": "3.3.3",
+    "uuid": "^9.0.1"
+  },
+  "browser": {
+    "fs": false,
+    "path": false, 
+    "os": false, 
+    "net": false, 
+    "tls": false
   }
 }

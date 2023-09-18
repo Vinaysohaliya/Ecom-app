@@ -17,7 +17,7 @@ function Cart() {
   return (
     <div>
       <h2 className="text-3xl font-bold mb-4 flex items-center justify-center">Your Shopping Cart</h2>
-      {cart.map((product) => (
+      {cart&&cart.map((product) => (
         <div key={product.id} className="bg-white p-4 rounded-lg shadow-md w-1/4">
           <img src={product.imageUrl} alt={product.name} className="w-full h-40 object-cover rounded" />
           <h2 className="text-xl font-semibold mt-2">{product.name}</h2>
