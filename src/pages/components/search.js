@@ -12,20 +12,13 @@ const Search = () => {
 
     const dispatch = useDispatch();
 
-
-
     const router = useRouter();
-
 
     function handelSearchchange(e) {
         const query = e.target.value;
         dispatch(setsearch(query))
         dispatch(handleSearch(query))
     }
-
-
-
-
 
     return (
         <div>

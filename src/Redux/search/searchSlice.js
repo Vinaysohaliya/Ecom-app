@@ -5,10 +5,9 @@ const searchSlice = createSlice({
   name: 'search',
   initialState:{
     search:'',
-    FilteredProducts:null,
+    FilteredProducts:null, 
   },
-  reducers: {
-   
+  reducers: {   
      handleSearch : (state,action) => {
         const trimmedQuery = action.payload.trim().toLowerCase();
         if (trimmedQuery === '') {
@@ -16,21 +15,15 @@ const searchSlice = createSlice({
         } else {
             const matchingProducts = products.filter((product) =>
                 product.name.toLowerCase().includes(trimmedQuery)
-            );
+            );  
             state.FilteredProducts=matchingProducts;
         }
     },
     setsearch:(state,action)=>{
         state.search=action.payload;
-    }
-
-
-
-   
+    }   
   },
 });
-
-
 
 
 export const { handleSearch, setsearch } = searchSlice.actions;
