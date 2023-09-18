@@ -6,11 +6,11 @@ connectToDatabase();
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { name, description, price, category} = req.body;
+    const { name, description, price, category,subcategory} = req.body;
 
     try {
       // Validate the product data
-      if (!name || !description || !price || !category ) {
+      if (!name || !description || !price || !category||!subcategory ) {
         return res.status(400).json({ error: 'Invalid product data' });
       }
 
@@ -20,6 +20,7 @@ export default async function handler(req, res) {
         description,
         price,
         category,
+        subcategory
       });
 
       await newProduct.save();

@@ -22,19 +22,19 @@ const sortSlice = createSlice({
 
      state.sortedProducts=newSortedProducts;
     },
-    handleCategory:(state,action)=>{
-      const categery = action.payload;
-       if (categery=='All') {
+    handlesubCategory:(state,action)=>{
+      const subcategery = action.payload;
+       if (subcategery=='All') {
             state.sortedProducts=products
         }else{
-            const categeryProducts=products.filter((p)=>p.category==categery)
-            state.sortedProducts=categeryProducts;
+            const subcategeryProducts=products.filter((p)=>p.category==subcategery)
+            state.sortedProducts=subcategeryProducts;
         }
     }
   }
 })
 
-export const { handleSort,handleCategory } = sortSlice.actions;
+export const { handleSort,handlesubCategory } = sortSlice.actions;
 
 
 export default sortSlice.reducer;

@@ -12,13 +12,13 @@ function ProductList() {
 
   useEffect(() => {
    
-    dispatch(fetchCategoryProducts('men')); 
+    dispatch(fetchCategoryProducts('women')); 
   }, [dispatch]);
 
   return (
     <div>
       <div className="flex">
-       
+      
       </div>
       <div className="flex justify-evenly my-10 gap-4 flex-wrap">
         {categoryProducts.map((product) => (

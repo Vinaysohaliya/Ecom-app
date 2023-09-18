@@ -3,16 +3,14 @@ import ProductCard from './components/productCard';
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCategoryProducts } from '../Redux/category/category';
-import { useRouter } from 'next/router'
 function ProductList() {
   const categoryProducts = useSelector((state) => state.category.categoryProducts);
   const dispatch = useDispatch();
-  const router = useRouter()
-  console.log();
+  
 
   useEffect(() => {
    
-    dispatch(fetchCategoryProducts('men')); 
+    dispatch(fetchCategoryProducts('kids')); 
   }, [dispatch]);
 
   return (
@@ -21,7 +19,7 @@ function ProductList() {
        
       </div>
       <div className="flex justify-evenly my-10 gap-4 flex-wrap">
-        {categoryProducts.map((product) => (
+        { categoryProducts.map((product) => (
           <div key={product.id} className="bg-white p-4 rounded-lg shadow-md">
             <Link href={`/product/${product.id}`}>
               <ProductCard product={product} />

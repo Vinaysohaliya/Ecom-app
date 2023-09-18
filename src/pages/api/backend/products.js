@@ -11,8 +11,6 @@ export default async function handler(req, res) {
       const products = await Product.find({});
       console.log(products);
 
-      // Close the MongoDB connection
-      mongoose.connection.close();
 
       // Send the products as a JSON response
       res.status(200).json(products);

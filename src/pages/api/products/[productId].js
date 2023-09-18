@@ -1,4 +1,4 @@
-import  connectToDatabase  from '../backend/db'; 
+import connectToDatabase from '../backend/db';
 import Product from '../backend/product.model';
 import mongoose from 'mongoose';
 
@@ -14,11 +14,9 @@ export default async function handler(req, res) {
       await connectToDatabase();
 
       // Fetch the product by ID
-      console.log("gigi");
       const product = await Product.findById(productId);
-console.log(product);
-      // Close the MongoDB connection
-      mongoose.connection.close();
+      console.log(product);
+
 
       if (!product) {
         return res.status(404).json({ error: 'Product not found' });

@@ -7,7 +7,7 @@ const AddProduct = () => {
     description: '',
     price: 0,
     category: '',
-    subcategory: '', // Add the subcategory field
+    subcategory: '',
   });
 
   const handleInputChange = (e) => {
@@ -25,7 +25,7 @@ const AddProduct = () => {
       const response = await axios.post('/api/backend/add', productData);
       if (response.status === 201) {
         console.log('Product added successfully:', response.data);
-        // Optionally, you can reset the form fields after successful submission
+      
         setProductData({
           name: '',
           description: '',
