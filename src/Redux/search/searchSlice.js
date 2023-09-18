@@ -12,7 +12,7 @@ const searchSlice = createSlice({
      handleSearch : (state,action) => {
         const trimmedQuery = action.payload.trim().toLowerCase();
         if (trimmedQuery === '') {
-            state.FilteredProducts=null // Reset to all products if the query is empty
+            state.FilteredProducts=null 
         } else {
             const matchingProducts = products.filter((product) =>
                 product.name.toLowerCase().includes(trimmedQuery)

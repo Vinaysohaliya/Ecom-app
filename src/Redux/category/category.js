@@ -1,8 +1,6 @@
-// categorySlice.js
 
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios'; // Import Axios for making HTTP requests
-
+import axios from 'axios'; 
 const initialState = {
   categoryProducts: [],
   loading: false,
@@ -34,12 +32,11 @@ export const {
   fetchCategoryProductsFailure,
 } = categorySlice.actions;
 
-// Async action to fetch products by category from the backend
 export const fetchCategoryProducts = (category) => async (dispatch) => {
   dispatch(fetchCategoryProductsStart());
 
   try {
-    const response = await axios.get(`/api/${category}`); // Replace with your backend API endpoint
+    const response = await axios.get(`/api/${category}`);
     console.log(response.data);
     const categoryProducts = response.data;
 
