@@ -1,4 +1,4 @@
- import mongoose from 'mongoose'
+import mongoose from 'mongoose'
 
 
 const mongoURI = 'mongodb+srv://vinay:22112002@cluster0.qyxgam9.mongodb.net/';
@@ -15,7 +15,7 @@ const connectToDatabase = async () => {
     });
 
     console.log('Connected to MongoDB');
-    return mongoose.connection;
+    return mongoose;
   } catch (error) {
     console.error('MongoDB connection error:', error);
     throw error; 

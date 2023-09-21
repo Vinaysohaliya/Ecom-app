@@ -11,7 +11,7 @@ export default async (req, res) => {
     });
 
     const order = await razorpayInstance.orders.create({
-      amount: amount * 100, // Razorpay expects the amount in paise
+      amount: amount * 100,
       currency: currency,
       receipt: orderId,
     });

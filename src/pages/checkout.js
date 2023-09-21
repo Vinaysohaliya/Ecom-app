@@ -36,9 +36,9 @@ function Checkout() {
       description: 'Payment for your order',
       order_id: orderData.id,
       handler: function (response) {
-        // Handle the payment success event
+        
         console.log(response);
-        // You can update your UI or navigate to a success page here
+       
       },
     };
 

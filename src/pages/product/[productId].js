@@ -1,20 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../Redux/cart/cartSlice';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import axios from 'axios';
 
 function ProductDetailPage() {
-  const dispatch = useDispatch();
+
+  let userid =null;
+
+  axios.get('/api/getUserId')
+  .then((response) => {
+    const { userId } = response.data;
+   userid=userId;
+    console.log('User ID:', userId);
+
+  })
+  .catch((error) => {
+    console.error('Error fetching user ID:', error);
+  });
+
   const router = useRouter();
+
   const { productId } = router.query;
-  console.log(productId);
+
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true); 
 
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
+  const handleAddToCart = async () => {
+    try {
+      const response = await axios.post('/api/addToCart', { userId:userid, productId });
+      
+      console.log('Product added to cart:', response.data);
+
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+    }
   };
 
   useEffect(() => {

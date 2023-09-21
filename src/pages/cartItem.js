@@ -1,10 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart } from '../Redux/cart/cartSlice';
 import Link from 'next/link';
+import { useEffect } from 'react';
+import { fetchCartData } from '../Redux/cart/cartSlice';
 
 
 function Cart() {
   const cart = useSelector((state) => state.cart.item);
+  console.log(cart);
   const carttotal = useSelector((state) => state.cart.total);
 
   const dispatch = useDispatch();
@@ -13,6 +16,9 @@ function Cart() {
     dispatch(removeFromCart(product));
   };
 
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch]);
 
   return (
     <div>

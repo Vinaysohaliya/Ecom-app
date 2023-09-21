@@ -26,6 +26,12 @@ const NavBar = () => {
         <li className="mx-2">
           <Link href="/cartItem">cart</Link>
         </li>
+        <li className="mx-2">
+          <Link href="/signup">signup</Link>
+        </li>
+        <li className="mx-2">
+          <Link href="/signin">signin</Link>
+        </li>
       </ul>
       <Search/>
     </nav>

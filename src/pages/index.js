@@ -4,7 +4,7 @@ import LandingPage from './Landing'
 const Main = () => {
   return (
     <div>
-      <LandingPage/>
+      <LandingPage />
     </div>
   )
 }
