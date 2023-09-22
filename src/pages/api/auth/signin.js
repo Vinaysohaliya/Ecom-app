@@ -1,7 +1,6 @@
 import User from '../model/user';
 import bcrypt from 'bcrypt';
-import { serialize } from 'cookie'; // Import the serialize function from the 'cookie' module
-
+import { serialize } from 'cookie'; 
 import jwt from 'jsonwebtoken';
 
 

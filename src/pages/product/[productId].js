@@ -83,7 +83,6 @@ function ProductDetailPage() {
           >
             Go to Cart
           </Link>
-          <div>{}</div>
         </div>
       </div>
     );

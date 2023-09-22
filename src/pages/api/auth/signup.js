@@ -1,9 +1,8 @@
-//signup backend api
 import User from '../model/user';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import connectUserDB from './db/user.db';
-import { serialize } from 'cookie'; // Import the serialize function from the 'cookie' module
+import { serialize } from 'cookie'; 
 
 connectUserDB(); // Connect to the MongoDB database
 

@@ -3,51 +3,56 @@ import axios from 'axios';
 
 const cartSlice = createSlice({
   name: 'cart',
-  initialState:{
-    item:[],
-    total:0
+  initialState: {
+    items: [],
+    total: 0,
   },
   reducers: {
-    // addToCart: (state, action) => {
-    //   const existingItem = state.item.find((item) => item.id === action.payload.id);
-
-    //   if (existingItem) {
-    //     existingItem.quantity++;
-    //   } else {
-    //     state.item.push({ ...action.payload, quantity: 1 });
-    //   }
-
-    //   state.total = state.item.reduce((total, product) => {
-    //     return total + product.price * product.quantity;
-    //   }, 0);
-
-    // },
-    // removeFromCart: (state, action) => {
-    //   return state.item.filter((item) => item.id !== action.payload.id);
-    // },
-    setCartData:(state,action)=>{
-        state.item=action.payload;  
-    }
-   
+    setCartData: (state, action) => {
+      state.total = state.items.reduce((total, product) => {
+        return total + product.price*product.quantity;
+      }, 0);
+      state.items = action.payload.map(product => ({
+        productId: product.productId,
+        quantity: product.quantity,
+        category:product.category,
+        price:product.price,
+        subcategory:product.subcategory,
+        name:product.name,
+        description:product.description,
+      }));
+    },
+    removeFromCart: (state, action) => {
+      const productIdToRemove = action.payload;
+      state.items = state.items.filter((product) => product._id !== productIdToRemove);
+      state.total = state.items.reduce((total, product) => total + product.price * product.quantity, 0);
+    },
   },
 });
 
 
-
 export const fetchCartData = () => async (dispatch) => {
   try {
-    const response = await axios.get('/api/cartData'); 
+    const response = await axios.get('/api/cartData');
     const cartData = response.data;
-    dispatch(setCartData(cartData)); 
+    dispatch(setCartData(cartData));
   } catch (error) {
-
     console.error('Error fetching cart data:', error);
   }
 };
 
+// export const removeCartData = (productId) => async (dispatch) => {
+//   try {
+//     const responce= await axios.delete(`/api/removecartData/${productId}`);
+//     console.log(responce);
+//     // After successful removal, dispatch an action to update the Redux state
+//     dispatch(removeFromCart(productId));
+//   } catch (error) {
+//     console.error('Error removing product from cart:', error);
+//   }
+// };
 
 
-export const { setCartData } = cartSlice.actions;
-
+export const { setCartData, removeFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

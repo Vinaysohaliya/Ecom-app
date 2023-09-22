@@ -1,7 +1,6 @@
 import connectToDatabase from './auth/db/user.db';
 import jwt from 'jsonwebtoken';
 import User from './model/user';
-import Product from './backend/product.model';
 
 export default async function handler(req, res) {
   console.log("API route started");
@@ -11,12 +10,12 @@ export default async function handler(req, res) {
   }
 
   try {
-    const token = req.cookies.token; 
+    const token = req.cookies.token;
     if (!token) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    const decoded = jwt.verify(token, 'your-secret-key'); 
+    const decoded = jwt.verify(token, 'your-secret-key');
     const userId = decoded.id;
 
     try {
@@ -29,17 +28,20 @@ export default async function handler(req, res) {
 
       const cartData = user.cart || [];
 
-      // Map cart items to retrieve product details
       const products = await Promise.all(
-        cartData.map(async (productId) => {
-          const product = await Product.findById(productId);
-          return product;
+        cartData.length && cartData.map(async (p) => {
+          const productId = p.productId;
+          const quantity = p.quantity;
+          const name = p.name;
+          const description = p.description;
+          const category = p.category;
+          const subcategory = p.subcategory;
+          const price = p.price;
+
+          return { productId, name, quantity, price, subcategory, category, description }
         })
       );
-
-      console.log(products);
-
-      res.status(200).json(products); // Send product details in the response
+      const response = res.status(200).json(products); // Send product details in the response
     } catch (error) {
       console.error('Error fetching cart data:', error);
       res.status(500).json({ error: 'Internal Server Error' });

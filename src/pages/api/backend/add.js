@@ -14,7 +14,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Invalid product data' });
       }
 
-      // Create a new product document and save it to the database
+     
       const newProduct = new Product({
         name,
         description,
