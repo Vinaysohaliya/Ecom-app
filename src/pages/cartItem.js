@@ -10,7 +10,8 @@ function Cart() {
   const cart = useSelector((state) => state.cart.items);
   const carttotal = useSelector((state) => state.cart.total);
   const dispatch = useDispatch();
-
+console.log("cart");
+console.log(cart);
   useEffect(() => {
     dispatch(fetchCartData());
   }, [dispatch]);
@@ -32,9 +33,9 @@ function Cart() {
       <h2 className="text-3xl font-bold mb-4 flex items-center justify-center">Your Shopping Cart</h2>
       {cart &&
         cart.map((product) => (
-          <div key={product._id} className="bg-white p-4 rounded-lg shadow-md w-1/4">
+          <div key={product.productId} className="bg-white p-4 rounded-lg shadow-md w-1/4">
             <ProductCard product={product} />
-            <button onClick={() => handleRemove(product._id)}>Remove</button>
+            <button onClick={() => handleRemove(product.productId)}>Remove</button>
             <div>{product.quantity}</div>
           </div>
         ))}

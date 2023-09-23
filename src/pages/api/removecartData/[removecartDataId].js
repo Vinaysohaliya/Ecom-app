@@ -6,6 +6,7 @@ export default async function handler(req, res) {
   try {
     if (req.method === "DELETE") {
       const { removecartDataId } = req.query;
+      console.log(removecartDataId);
       const token = req.cookies.token;
       if (!token) {
         return res.status(401).json({ error: "Unauthorized" });
@@ -18,13 +19,13 @@ export default async function handler(req, res) {
       if (!user) {
         return res.status(404).json({ error: "User not found" });
       }
-      console.log(removecartDataId);
 
       // Remove the product from the user's cart
-      const updatedCart = user.cart.filter((cartItem) => cartItem._id.toString() !== removecartDataId);
+      const updatedCart = user.cart.filter((cartItem) => cartItem.productId.toString() !== removecartDataId);
 
       // Update the user's cart in the database
       user.cart = updatedCart;
+      console.log(user.cart);
       await user.save();
 
       return res.status(200).json({ message: "Item removed from cart", updatedCart });
