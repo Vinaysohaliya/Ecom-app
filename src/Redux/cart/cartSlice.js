@@ -24,7 +24,7 @@ const cartSlice = createSlice({
     },
     removeFromCart: (state, action) => {
       const productIdToRemove = action.payload;
-      state.items = state.items.filter((product) => product._id !== productIdToRemove);
+      state.items = state.items.filter((product) => product.productId !== productIdToRemove);
       state.total = state.items.reduce((total, product) => total + product.price * product.quantity, 0);
     },
   },
@@ -41,16 +41,6 @@ export const fetchCartData = () => async (dispatch) => {
   }
 };
 
-// export const removeCartData = (productId) => async (dispatch) => {
-//   try {
-//     const responce= await axios.delete(`/api/removecartData/${productId}`);
-//     console.log(responce);
-//     // After successful removal, dispatch an action to update the Redux state
-//     dispatch(removeFromCart(productId));
-//   } catch (error) {
-//     console.error('Error removing product from cart:', error);
-//   }
-// };
 
 
 export const { setCartData, removeFromCart } = cartSlice.actions;

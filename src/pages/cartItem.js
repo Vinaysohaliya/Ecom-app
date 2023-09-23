@@ -22,6 +22,7 @@ console.log(cart);
       await axios.delete(`/api/removecartData/${productId}`);
 
       // After successful removal, you can update your Redux state if needed
+
       dispatch(removeFromCart(productId));
     } catch (error) {
       console.error('Error removing product from cart:', error);
