@@ -1,24 +1,28 @@
 import Link from 'next/link';
-import { handleSearch,setsearch } from '@/Redux/search/searchSlice';
-import React, { useState } from 'react'
+import { fetchProducts, handleSearch,setSearch } from '@/Redux/search/searchSlice';
+import React, { useEffect } from 'react'
 import ProductCard from './productCard';
-import { useRouter } from 'next/router';
 import { useDispatch,useSelector } from 'react-redux';
+
 
 const Search = () => {
 
     const search = useSelector((state) => state.search.search);
-    const FilteredProducts = useSelector((state) => state.search.FilteredProducts);
+    const FilteredProducts = useSelector((state) => state.search.filteredProducts);
 
     const dispatch = useDispatch();
 
-    const router = useRouter();
 
     function handelSearchchange(e) {
         const query = e.target.value;
-        dispatch(setsearch(query))
+        dispatch(setSearch(query))
         dispatch(handleSearch(query))
     }
+
+    useEffect(() => {
+        // Dispatch the fetchProducts action when the component mounts
+        dispatch(fetchProducts());
+      }, [dispatch]);
 
     return (
         <div>

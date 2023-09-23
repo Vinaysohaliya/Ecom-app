@@ -1,32 +1,59 @@
-import { createSlice } from '@reduxjs/toolkit';
-import products from '../../pages/product.json'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+// Create an async thunk to fetch products from the backend
+export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
+  try {
+    const response = await fetch('/api/fetchAllProduct'); // Replace with your actual API endpoint
+    if (!response.ok) {
+      throw new Error('Failed to fetch products');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+});
 
 const searchSlice = createSlice({
   name: 'search',
-  initialState:{
-    search:'',
-    FilteredProducts:null, 
+  initialState: {
+    search: '',
+    filteredProducts: null,
+    products: [], // Add a products array to store the fetched products
+    loading: false,
   },
-  reducers: {   
-     handleSearch : (state,action) => {
-        const trimmedQuery = action.payload.trim().toLowerCase();
-        if (trimmedQuery === '') {
-            state.FilteredProducts=null 
-        } else {
-            const matchingProducts = products.filter((product) =>
-                product.name.toLowerCase().includes(trimmedQuery)
-            );  
-            state.FilteredProducts=matchingProducts;
-        }
+  reducers: {
+    handleSearch: (state, action) => {
+      console.log("pppppppppppppppppppppppppppppppppppp"+state.products);
+      const trimmedQuery = action.payload.trim().toLowerCase();
+      if (trimmedQuery === '') {
+        state.filteredProducts = null;
+      } else {
+        const matchingProducts = state.products.filter((product) =>
+          product.name.toLowerCase().includes(trimmedQuery)
+        );
+        state.filteredProducts = matchingProducts;
+      }
     },
-    setsearch:(state,action)=>{
-        state.search=action.payload;
-    }   
+    setSearch: (state, action) => {
+      state.search = action.payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProducts.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.products = action.payload;
+      })
+      .addCase(fetchProducts.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 
-
-export const { handleSearch, setsearch } = searchSlice.actions;
-
+export const { handleSearch, setSearch } = searchSlice.actions;
 
 export default searchSlice.reducer;

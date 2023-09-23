@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 
 export default async function getUserId(req, res) {
   try {
-    console.log("///////////////////");
     
     const token = req.cookies.token; 
     if (!token) {
