@@ -1,50 +1,50 @@
 import Link from 'next/link';
-import { fetchProducts, handleSearch,setSearch } from '@/Redux/search/searchSlice';
-import React, { useEffect } from 'react'
-import ProductCard from './productCard';
-import { useDispatch,useSelector } from 'react-redux';
-
+import { fetchProducts, handleSearch, setSearch } from '@/Redux/search/searchSlice';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import SearchCard from './searchCard';
 
 const Search = () => {
+  const search = useSelector((state) => state.search.search);
+  const filteredProducts = useSelector((state) => state.search.filteredProducts);
 
-    const search = useSelector((state) => state.search.search);
-    const FilteredProducts = useSelector((state) => state.search.filteredProducts);
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
+  function handleSearchChange(e) {
+    const query = e.target.value;
+    dispatch(setSearch(query));
+    dispatch(handleSearch(query));
+  }
 
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
-    function handelSearchchange(e) {
-        const query = e.target.value;
-        dispatch(setSearch(query))
-        dispatch(handleSearch(query))
-    }
-
-    useEffect(() => {
-        dispatch(fetchProducts());
-      }, [dispatch]);
-
-    return (
-        <div>
-            <input type='text' value={search} onChange={handelSearchchange} />
-            <div className=' flex'>
-                <div className="flex justify-evenly my-10 gap-4 ">
-                    {
-                        FilteredProducts && FilteredProducts.map((product) => (
-                            <div key={product._id} className="bg-white p-4 rounded-lg shadow-md">
-                                <Link href={`/product/${product._id}`}>
-                                    <ProductCard product={product} />
-                                </Link>
-                                <Link href={`/product/${product._id}`}>
-                                    <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 mt-2 rounded">
-                                        View Product
-                                    </button>
-                                </Link>
-                            </div>
-                        ))}
-                </div>
+  return (
+    <div>
+      <input
+        type="text"
+        value={search}
+        onChange={handleSearchChange}
+        className="w-full p-2 border border-gray-300 rounded shadow-sm"
+        placeholder="Search for products..."
+      />
+      <div className="flex justify-evenly my-2  flex-col">
+        {filteredProducts &&
+          filteredProducts.map((product) => (
+            <div
+              key={product._id}
+              className="pt-2 px-2 rounded-lg "
+            >
+              <Link href={`/product/${product._id}`}>
+                <SearchCard product={product} />
+              </Link>
+             
             </div>
-        </div>
-    )
-}
+          ))}
+      </div>
+    </div>
+  );
+};
 
-export default Search
+export default Search;

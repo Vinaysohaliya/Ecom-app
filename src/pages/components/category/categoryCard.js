@@ -9,9 +9,9 @@ const CategoryCard = ({ category }) => {
 
   return (
     <div className='w-56 mx-2'>
-      <div className="bg-white rounded-lg shadow-lg p-4" style={cardStyle}>
+      <div className="bg-white hover:shadow-lg p-4" style={cardStyle}>
         <div className="h-40" />
-        <h3 className="text-xl font-semibold text-gray-800 bg-white p-2 rounded-t-md">
+        <h3 className="text-xl font-semibold text-gray-800 bg-white p-2 text-center hover:text-white hover:bg-red-600">
           {category.name}
         </h3>
       </div>
