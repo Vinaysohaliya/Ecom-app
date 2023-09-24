@@ -1,25 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ProductCard from './components/productCard';
 import Link from 'next/link';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchCategoryProducts } from '../Redux/category/category';
-function ProductList() {
-  const categoryProducts = useSelector((state) => state.category.categoryProducts);
-  const dispatch = useDispatch();
-  
+import { useSelector } from 'react-redux';
+import SortingOptions from './components/sorting/sortAndFilter';
 
-  useEffect(() => {
-   
-    dispatch(fetchCategoryProducts('kids')); 
-  }, [dispatch]);
+function ProductList() {
+  const categoryProducts = useSelector((state) => state.sort.products);
+
+
 
   return (
     <div>
+    <SortingOptions category={"kids"}/>
       <div className="flex">
        
       </div>
       <div className="flex justify-evenly my-10 gap-4 flex-wrap">
-        { categoryProducts.map((product) => (
+        {categoryProducts.map((product) => (
           <div key={product.id} className="bg-white p-4 rounded-lg shadow-md">
               <ProductCard product={product} />
             <Link href={`/product/${product._id}`}>

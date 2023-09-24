@@ -1,22 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ProductCard from './components/productCard';
 import Link from 'next/link';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchCategoryProducts } from '../Redux/category/category';
-import { useRouter } from 'next/router'
-function ProductList() {
-  const categoryProducts = useSelector((state) => state.category.categoryProducts);
-  const dispatch = useDispatch();
-  const router = useRouter()
-  console.log();
+import { useSelector } from 'react-redux';
+import SortingOptions from './components/sorting/sortAndFilter';
 
-  useEffect(() => {
-   
-    dispatch(fetchCategoryProducts('men')); 
-  }, [dispatch]);
+function ProductList() {
+  const categoryProducts = useSelector((state) => state.sort.products);
+
+
 
   return (
     <div>
+    <SortingOptions category={"men"}/>
       <div className="flex">
        
       </div>

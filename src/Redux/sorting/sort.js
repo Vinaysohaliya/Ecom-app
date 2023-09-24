@@ -1,40 +1,38 @@
-import { createSlice } from '@reduxjs/toolkit';
-import products from '../../pages/product.json';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-const sortSlice = createSlice({
-  name: 'sort',
-  initialState: {
-    sortedProducts: products
-  },
-  reducers: {
-    handleSort: (state, action) => {
-
-      const sortType = action.payload;
-
-      let newSortedProducts = [...state.sortedProducts];
-
-
-      if (sortType === 'asc') {
-        newSortedProducts.sort((a, b) => a.price - b.price);
-      } else if (sortType === 'desc') {
-        newSortedProducts.sort((a, b) => b.price - a.price);
-      }
-
-     state.sortedProducts=newSortedProducts;
-    },
-    handlesubCategory:(state,action)=>{
-      const subcategery = action.payload;
-       if (subcategery=='All') {
-            state.sortedProducts=products
-        }else{
-            const subcategeryProducts=products.filter((p)=>p.category==subcategery)
-            state.sortedProducts=subcategeryProducts;
-        }
-    }
+export const fetchProducts = createAsyncThunk('products/fetch', async ({ category, sortType, subcategory }) => {
+  try {
+    const response = await axios.get(`/api/sortApi?category=${category}&subcategory=${subcategory}&sortBy=${sortType}`);
+    return response.data;
+  } catch (error) {
+    throw error;
   }
-})
+});
 
-export const { handleSort,handlesubCategory } = sortSlice.actions;
+const productsSlice = createSlice({
+  name: 'products',
+  initialState: {
+    products: [],
+    status: 'idle',
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProducts.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.products = action.payload;
 
+      })
+      .addCase(fetchProducts.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
+  },
+});
 
-export default sortSlice.reducer;
+export default productsSlice.reducer;

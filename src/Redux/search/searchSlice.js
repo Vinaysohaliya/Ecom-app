@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // Create an async thunk to fetch products from the backend
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
   try {
-    const response = await fetch('/api/fetchAllProduct'); // Replace with your actual API endpoint
+    const response = await fetch('/api/fetchAllProduct'); 
     if (!response.ok) {
       throw new Error('Failed to fetch products');
     }
@@ -24,7 +24,6 @@ const searchSlice = createSlice({
   },
   reducers: {
     handleSearch: (state, action) => {
-      console.log("pppppppppppppppppppppppppppppppppppp"+state.products);
       const trimmedQuery = action.payload.trim().toLowerCase();
       if (trimmedQuery === '') {
         state.filteredProducts = null;
