@@ -1,49 +1,62 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { useEffect } from 'react';
-import ProductCard from './components/productCard';
-import axios from 'axios';
-import { fetchCartData,removeFromCart } from '@/Redux/cart/cartSlice';
+import { fetchCartData } from '@/Redux/cart/cartSlice';
+import CartCard from './components/cartCard';
 
 
 function Cart() {
   const cart = useSelector((state) => state.cart.items);
   const carttotal = useSelector((state) => state.cart.total);
   const dispatch = useDispatch();
-console.log("cart");
-console.log(cart);
+
   useEffect(() => {
     dispatch(fetchCartData());
   }, [dispatch]);
 
-  const handleRemove = async (productId) => {
-    try {
-      // Make an API request to remove the product from the cart
-      await axios.delete(`/api/removecartData/${productId}`);
 
-      // After successful removal, you can update your Redux state if needed
-
-      dispatch(removeFromCart(productId));
-    } catch (error) {
-      console.error('Error removing product from cart:', error);
-    }
-  };
 
   return (
-    <div>
-      <h2 className="text-3xl font-bold mb-4 flex items-center justify-center">Your Shopping Cart</h2>
+    <div className='h-screen'>
+      <h1 className=' bg-amber-100 h-1/4  font-semibold text-3xl flex items-center justify-center'>Your Shopping Cart</h1>
+
+
+
+      <div className='flex items-center justify-evenly w-full p-10'>
+        <div>
+          <h1 className='font-bold hover:text-amber-500  p-2'>Product</h1>
+        </div>
+        <div>
+          <h1 className='text-gray-600  font-bold'>Quantity</h1>
+        </div>
+        <div>
+          <h1 className='text-gray-600  font-bold'>Price</h1>
+        </div>
+        <div>
+          <h1 className='text-red-500 font-bold'>Remove From Cart</h1>
+        </div>
+      </div>
+
+
+
+
       {cart &&
         cart.map((product) => (
-          <div key={product.productId} className="bg-white p-4 rounded-lg shadow-md w-1/4">
-            <ProductCard product={product} />
-            <button onClick={() => handleRemove(product.productId)}>Remove</button>
-            <div>{product.quantity}</div>
+          <div key={product.productId} className="bg-white p-4  ">
+            <CartCard product={product} />
+
           </div>
         ))}
-      <Link href="/checkout">Checkout</Link>
-      <div>
-        Subtotal: {carttotal}
+      <div className='flex items-center justify-end p-4 border-t border-gray-300 '>
+        <Link href="/checkout" className='text-blue-500   hover:bg-blue-600 hover:text-white p-2 font-semibold transition duration-300 ease-in-out m-5 mr-10'>
+          Checkout
+        </Link>
+
+        <div className='text-gray-600 mr-5'>
+          Subtotal: {carttotal}
+        </div>
       </div>
+
     </div>
   );
 }

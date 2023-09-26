@@ -8,6 +8,7 @@ const AddProduct = () => {
     price: 0,
     category: '',
     subcategory: '',
+    imageUrl:'',
   });
 
   const handleInputChange = (e) => {
@@ -113,7 +114,20 @@ const AddProduct = () => {
             required
           />
         </div>
-
+        <div className="mb-4">
+          <label htmlFor="imageUrl" className="block font-medium text-gray-700">
+          imageUrl
+          </label>
+          <input
+            type="text"
+            id="imageUrl"
+            name="imageUrl"
+            value={productData.imageUrl}
+            onChange={handleInputChange}
+            className="mt-1 p-2 border rounded-md w-full"
+            required
+          />
+        </div>
         <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"

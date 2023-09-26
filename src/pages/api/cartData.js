@@ -37,8 +37,9 @@ export default async function handler(req, res) {
           const category = p.category;
           const subcategory = p.subcategory;
           const price = p.price;
+          const imageUrl = p.imageUrl;          
 
-          return { productId, name, quantity, price, subcategory, category, description }
+          return { productId, name, quantity, price, subcategory, category, description,imageUrl }
         })
       );
       const response = res.status(200).json(products); // Send product details in the response

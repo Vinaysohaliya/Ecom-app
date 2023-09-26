@@ -11,19 +11,15 @@ function ProductList() {
 
   return (
     <div>
-    <SortingOptions category={"men"}/>
+    <SortingOptions category={"men"} />
       <div className="flex">
        
       </div>
       <div className="flex justify-evenly my-10 gap-4 flex-wrap">
         {categoryProducts.map((product) => (
           <div key={product.id} className="bg-white p-4 rounded-lg shadow-md">
-              <ProductCard product={product} />
-            <Link href={`/product/${product._id}`}>
-              <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 mt-2 rounded">
-                View Product
-              </button>
-            </Link>
+              <ProductCard product={product}/>
+          
           </div>
         ))}
       </div>

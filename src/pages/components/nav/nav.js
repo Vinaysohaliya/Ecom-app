@@ -30,7 +30,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <nav className="bg-black text-white p-4">
+    <nav className="bg-black text-white p-4 w-full">
       <div className="flex justify-between items-center">
   <Link href="/">
     <span className="text-lg font-bold cursor-pointer">Home</span>

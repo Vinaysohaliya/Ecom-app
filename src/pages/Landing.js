@@ -42,7 +42,7 @@ function ProductsPage() {
         <div className="flex flex-wrap justify-center my-10 gap-4 ">
           {/* Product Cards */}
           {products.map((product) => (
-            <div key={product._id} className="mb-4">
+            <div key={product._id} className="mb-4 bg-white p-4 rounded-lg shadow-md">
               <ProductCard product={product} />
              
             </div>
