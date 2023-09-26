@@ -112,7 +112,7 @@ function Checkout() {
           </div>
         ))} */}
         <div className=' flex items-center justify-center h-1/3 w-1/3 border-2   '>
-          <div className='font-semibold m-10 text-3xl'>Subtotal: {carttotal}</div>
+          <div className='font-semibold m-10 text-3xl'>Subtotal: {carttotal}₹ </div>
           <button
             onClick={handlePayment}
             className="bg-blue-500 hover:bg-green-600 text-white px-4 py-2 mt-2 "
@@ -121,7 +121,7 @@ function Checkout() {
           </button>
           <ToastContainer />
         </div>
-        <Link href='/contactus' className='mt-10 hover:bg-black hover:text-white p-4 font-semibold'>Don't Worry We are hear to support you</Link>
+        <Link href='/contactus' className='mt-10 hover:bg-black hover:text-white p-4 font-semibold'>IF you have any Query , Don't Worry We are hear to support you</Link>
 
       </div>
     </>

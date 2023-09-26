@@ -36,13 +36,13 @@ function ProductsPage() {
       </div>
 
       <div>
-        <h1 className="text-3xl font-bold m-7 text-center">
-          Welcome to our E-commerce Store
+        <h1 className="text-3xl font-bold m-7 text-center bg-amber-100  p-4">
+          Welcome to our MyCart
         </h1>
         <div className="flex flex-wrap justify-center my-10 gap-4 ">
           {/* Product Cards */}
           {products.map((product) => (
-            <div key={product._id} className="mb-4 bg-white p-4 rounded-lg shadow-md">
+            <div key={product._id} className="mb-4  p-4 ">
               <ProductCard product={product} />
              
             </div>

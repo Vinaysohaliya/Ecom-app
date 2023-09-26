@@ -1,10 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { FiMenu } from 'react-icons/fi'; // You may need to install the react-icons library
+import { FiMenu } from 'react-icons/fi';
+import axios from 'axios';
 
 const NavBar = () => {
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post('/api/auth/logout')
+
+      if (response.ok) {
+        console.log('Logout successful');
+      } else {
+        console.error('Logout failed');
+      }
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
+
+
+  useEffect(() => {
+    // Fetch user data and set the isLoggedIn state
+    async function fetchUserData() {
+      try {
+        const res = await axios.get('/api/getUserId');
+        if (res.status === 200) {
+          // User is logged in
+          setIsLoggedIn(true);
+        } else {
+          // User is not logged in
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        // Handle the error here, e.g., set isLoggedIn to false
+        setIsLoggedIn(false);
+      }
+    }
+
+    fetchUserData();
+  }, []);
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileScreen, setIsMobileScreen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Function to toggle the mobile menu
   const toggleMobileMenu = () => {
@@ -12,18 +52,14 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    // Function to check if the screen is mobile-sized
     const checkIsMobileScreen = () => {
       setIsMobileScreen(window.innerWidth <= 640);
     };
 
-    // Initial check
     checkIsMobileScreen();
 
-    // Add an event listener for window resize
     window.addEventListener('resize', checkIsMobileScreen);
 
-    // Clean up the event listener when the component unmounts
     return () => {
       window.removeEventListener('resize', checkIsMobileScreen);
     };
@@ -32,99 +68,111 @@ const NavBar = () => {
   return (
     <nav className="bg-black text-white p-4 w-full">
       <div className="flex justify-between items-center">
-  <Link href="/">
-    <span className="text-lg font-bold cursor-pointer">Home</span>
-  </Link>
-  {isMobileScreen ? (
-    // Render the mobile menu for small screens
-    <div className="flex items-center space-x-4">
-      <button
-        className="text-white cursor-pointer"
-        onClick={toggleMobileMenu}
-      >
-        <FiMenu className="text-xl" />
-      </button>
-      {isMobileMenuOpen && (
-        <div className="absolute top-16 right-0 bg-gray-800 p-4">
-          <ul className="space-y-2">
-            {/* Add your navigation links here */}
-            <li>
-              <Link href="/men">
-                <span className="text-white cursor-pointer">Men</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/women">
-                <span className="text-white cursor-pointer">Women</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/kids">
-                <span className="text-white cursor-pointer">Baby Collection</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/aboutus">
-                <span className="text-white cursor-pointer">About Us</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/contactus">
-                <span className="text-white cursor-pointer">Contact Us</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/cartItem">
-                <span className="text-white cursor-pointer">Cart</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/signup">
-                <span className="text-white cursor-pointer">Sign Up</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/signin">
-                <span className="text-white cursor-pointer">Sign In</span>
-              </Link>
-            </li>
-            {/* Add more links as needed */}
-          </ul>
-        </div>
-      )}
-    </div>
-  ) : (
-    // Render the regular navigation links for larger screens
-    <div className="flex items-center space-x-4">
-      <Link href="/men">
-        <span className="cursor-pointer">Men</span>
-      </Link>
-      <Link href="/women">
-        <span className="cursor-pointer">Women</span>
-      </Link>
-      <Link href="/kids">
-        <span className="cursor-pointer">Baby Collection</span>
-      </Link>
-      <Link href="/aboutus">
-        <span className="cursor-pointer">About Us</span>
-      </Link>
-      <Link href="/contactus">
-        <span className="cursor-pointer">Contact Us</span>
-      </Link>
-      <Link href="/cartItem">
-        <span className="cursor-pointer">Cart</span>
-      </Link>
-      <Link href="/signup">
-        <span className="cursor-pointer">Sign Up</span>
-      </Link>
-      <Link href="/signin">
-        <span className="cursor-pointer">Sign In</span>
-      </Link>
-      {/* Add more links as needed */}
-    </div>
-  )}
-</div>
-
+        <Link href="/">
+          <span className="text-lg font-bold cursor-pointer">Home</span>
+        </Link>
+        {isMobileScreen ? (
+          <div className="flex items-center space-x-4">
+            <button
+              className="text-white cursor-pointer"
+              onClick={toggleMobileMenu}
+            >
+              <FiMenu className="text-xl" />
+            </button>
+            {isMobileMenuOpen && (
+              <div className="absolute top-16 right-0 bg-black p-4">
+                <ul className="space-y-2">
+                  <li>
+                    <Link href="/men">
+                      <span className="text-white cursor-pointer ">Men</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/women">
+                      <span className="text-white cursor-pointer">Women</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/kids">
+                      <span className="text-white cursor-pointer">Baby Collection</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/cartItem">
+                      <span className="text-white cursor-pointer">Cart</span>
+                    </Link>
+                  </li>
+                 
+                  {/* Add other navigation links here */}
+                  {isLoggedIn ? (
+                    <li>
+                      <span
+                        className="text-white cursor-pointer"
+                        onClick={() => {
+                          handleLogout();
+                          setIsLoggedIn(false);
+                        }}
+                      >
+                        Log Out
+                      </span>
+                    </li>
+                  ) : (
+                    <>
+                      <li>
+                        <Link href="/signup">
+                          <span className="text-white cursor-pointer">Sign Up</span>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/signin">
+                          <span className="text-white cursor-pointer">Sign In</span>
+                        </Link>
+                      </li>
+                    </>
+                  )}
+                </ul>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="flex items-center space-x-4">
+            <Link href="/men">
+              <span className="cursor-pointer">Men</span>
+            </Link>
+            <Link href="/women">
+              <span className="cursor-pointer">Women</span>
+            </Link>
+            <Link href="/kids">
+              <span className="cursor-pointer">Baby Collection</span>
+            </Link>
+           
+            <Link href="/cartItem">
+              <span className="cursor-pointer">Cart</span>
+            </Link>
+            {/* Add other navigation links here */}
+            {isLoggedIn ? (
+              <span
+                className="cursor-pointer"
+                onClick={() => {
+                  handleLogout();
+                  setIsLoggedIn(false);
+                }}
+              >
+                Log Out
+              </span>
+            ) : (
+              <>
+                <Link href="/signup">
+                  <span className="cursor-pointer">Sign Up</span>
+                </Link>
+                <Link href="/signin">
+                  <span className="cursor-pointer">Sign In</span>
+                </Link>
+              </>
+            )}
+          </div>
+        )}
+      </div>
     </nav>
   );
 };

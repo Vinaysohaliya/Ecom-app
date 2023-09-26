@@ -31,7 +31,7 @@ const CartCard = ({ product }) => {
 
             </div>
             <div>
-                <div className='py-10' >{product.price}</div>
+                <div className='py-10' >{product.price}₹</div>
 
             </div>
             <div>
