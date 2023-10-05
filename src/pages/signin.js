@@ -39,7 +39,7 @@ export default function Login() {
         <form onSubmit={handleSubmit}>
           {error && <p className="text-red-500 mb-2">{error}</p>}
           <div className="mb-4">
-            <label className="block text-gray-700">Email:</label>
+          <label className="block text-gray-700">Email:</label>
             <input
               type="email"
               name="email"

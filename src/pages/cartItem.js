@@ -51,12 +51,12 @@ function Cart() {
 
       <div className='flex items-center justify-end p-4 border-t border-gray-300 '>
         <Link href="/" className='   hover:bg-black hover:text-white p-2 font-semibold transition duration-300 ease-in-out m-5 mr-10 '>
-        Continue Shopping
+          Continue Shopping
         </Link>
-        <Link href="/checkout" className='text-blue-500   hover:bg-blue-600 hover:text-white p-2 font-semibold transition duration-300 ease-in-out m-5 mr-10'>
+        {carttotal > 0 ? <Link href="/checkout" className='text-blue-500   hover:bg-blue-600 hover:text-white p-2 font-semibold transition duration-300 ease-in-out m-5 mr-10'>
           Checkout
         </Link>
-
+          : null}
         <div className='text-gray-600 mr-5'>
           Subtotal: {carttotal}₹
         </div>

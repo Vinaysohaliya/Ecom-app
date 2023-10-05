@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import axios from 'axios';
@@ -47,9 +46,8 @@ function ProductDetailPage() {
   }
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-4">Product not found</h1>
-      <p>This product does not exist or has been removed.</p>
+    <div className=' flex flex-col h-[76vh]  justify-center '>
+      <h1 className="text-3xl font-bold mb-4 flex items-center justify-center  ">Sign in Required For Viewing Products</h1>
     </div>
   );
 }

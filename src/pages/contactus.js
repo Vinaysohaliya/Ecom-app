@@ -5,10 +5,12 @@ const ContactUs = () => {
   
 
   return (
-    <div className='flex flex-col h-screen items-center justify-center'>
+    <div className='flex flex-col h-[76vh] items-center justify-center'>
       <h1 className='text-3xl font-semibold mb-4'>
         Get in Touch
       </h1>
+      <p>"This feature is on Work"</p>
+
       <textarea
         className='border rounded-lg p-2 w-64 h-32 resize-none'
         placeholder='Enter Message'

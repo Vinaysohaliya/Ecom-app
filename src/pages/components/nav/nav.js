@@ -2,15 +2,20 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FiMenu } from 'react-icons/fi';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const NavBar = () => {
+  const router = useRouter();
+
 
   const handleLogout = async () => {
     try {
       const response = await axios.post('/api/auth/logout')
 
-      if (response.ok) {
+      if (response.status==200) {
         console.log('Logout successful');
+         router.push('/'); 
+
       } else {
         console.error('Logout failed');
       }
@@ -66,7 +71,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <nav className="bg-black text-white p-4 w-full">
+    <nav className="bg-gray-800 text-white p-4 w-full">
       <div className="flex justify-between items-center">
         <Link href="/">
           <span className="text-lg font-bold cursor-pointer">Home</span>
@@ -80,7 +85,7 @@ const NavBar = () => {
               <FiMenu className="text-xl" />
             </button>
             {isMobileMenuOpen && (
-              <div className="absolute top-16 right-0 bg-black p-4">
+              <div className="absolute top-16 right-0 bg-gray-800 p-4">
                 <ul className="space-y-2">
                   <li>
                     <Link href="/men">

@@ -17,10 +17,12 @@ function Checkout() {
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const [orderData, setOrderData] = useState(null);
   const [userId, setUserId] = useState(null);
+  console.log(userId);
 
   async function fetchUserId() {
     const userIdResponse = await axios.get('/api/getUserId');
-    setUserId(userIdResponse.data.userId);
+    
+    setUserId(userIdResponse?.data?.userId);
   }
 
   useEffect(() => {
@@ -28,6 +30,12 @@ function Checkout() {
   }, []);
 
   const handlePayment = async () => {
+    // Check if the user is authenticated
+    if (!userId) {
+      toast.error('Authentication required for checkout. Please log in.');
+      return; // Stop further execution
+    }
+
     try {
       const orderResponse = await fetch('/api/create-order', {
         method: 'POST',
@@ -50,7 +58,7 @@ function Checkout() {
 
       const options = {
         key: 'rzp_test_pG99zrZJZvCVV3',
-        amount: carttotal * 100, 
+        amount: carttotal * 100,
         currency: orderData.currency,
         name: 'Your Company Name',
         description: 'Payment for your order',
@@ -60,8 +68,8 @@ function Checkout() {
             position: toast.POSITION.TOP_CENTER
           });
           setIsOrderPlaced(true);
-          setOrderData(orderData); 
-          await setOrder();  
+          setOrderData(orderData);
+          await setOrder();
         },
       };
 
@@ -95,37 +103,36 @@ function Checkout() {
     setTimeout(() => {
       router.push('/');
     }, 5000);
-   
   }
 
   return (
-    <>
+    <div className='h-[76vh]'>
       <h2 className="text-3xl font-bold mb-4 flex items-center justify-center">Checkout</h2>
-      <div className=' h-96 flex items-center justify-center  flex-col'>
-        <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
-        {/* {cart &&
-        cart.map((product) => (
-          <div key={product.productId} className="bg-white p-4 rounded-lg shadow-md w-1/4">
-            <ProductCard product={product} />
-            <button onClick={() => handleRemove(product.productId)}>Remove</button>
-            <div>{product.quantity}</div>
+      {userId ? (
+        <div className='h-96 flex items-center justify-center flex-col'>
+          <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
+          {/* Rest of your checkout content */}
+          <div className='flex items-center justify-center h-1/3 w-1/3 border-2   '>
+            <div className='font-semibold m-10 text-3xl'>Subtotal: {carttotal}₹ </div>
+            <button
+              onClick={handlePayment}
+              className="bg-blue-500 hover:bg-green-600 text-white px-4 py-2 mt-2 "
+            >
+              Place Order
+            </button>
+            <ToastContainer />
           </div>
-        ))} */}
-        <div className=' flex items-center justify-center h-1/3 w-1/3 border-2   '>
-          <div className='font-semibold m-10 text-3xl'>Subtotal: {carttotal}₹ </div>
-          <button
-            onClick={handlePayment}
-            className="bg-blue-500 hover:bg-green-600 text-white px-4 py-2 mt-2 "
-          >
-            Place Order
-          </button>
-          <ToastContainer />
+          <Link href='/contactus' className='mt-10 hover:bg-black hover:text-white p-4 font-semibold'>
+            If you have any queries, we are here to support you
+          </Link>
         </div>
-        <Link href='/contactus' className='mt-10 hover:bg-black hover:text-white p-4 font-semibold'>IF you have any Query , Don't Worry We are hear to support you</Link>
-
-      </div>
-    </>
-
+      ) : (
+        <div className="text-center">
+          <p>Please log in to proceed with the checkout.</p>
+          <Link href="/login" className="text-blue-500 hover:underline">Log In</Link>
+        </div>
+      )}
+    </div>
   );
 }
 

@@ -11,7 +11,7 @@ export default async function getUserId(req, res) {
 
     const decoded = jwt.verify(token, 'your-secret-key');
     const userId = decoded.id;
-    return res.json({ userId });
+    return res.status(200).json({ userId });
 
   } catch (error) {
     console.error('Error fetching user ID:', error);
