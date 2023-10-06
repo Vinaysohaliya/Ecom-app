@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
@@ -51,7 +52,7 @@ const ProductDetailCard = ({ product, productId }) => {
                         <Carousel showStatus={false} showIndicators={false} infiniteLoop={true}>
                             {products.images.map((image, index) => (
                                 <div key={index} className="h-48 w-64 md:w-96">
-                                    <img
+                                    <Image
                                         src={product.imageUrl}
                                         alt={`Product Image ${index}`}
                                         className="h-full w-full object-cover"

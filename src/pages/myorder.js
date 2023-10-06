@@ -1,6 +1,7 @@
 // components/Order.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Image from 'next/image';
 
 function Order() {
   const [orders, setOrders] = useState([]);
@@ -34,7 +35,7 @@ function Order() {
                 {order.products.map((product) => (
                   <li key={product._id}>
                   <p>{product.name}</p>
-                  <img src={product.imageUrl}></img>
+                  <Image alt='img' src={product.imageUrl}></Image>
                   </li>
                 ))}
               </ul>
