@@ -2,7 +2,7 @@ import React from 'react';
 
 const CategoryCard = ({ category }) => {
   const cardStyle = {
-    backgroundImage: `url(${category.imageUrl})`,
+    backgroundImage: `url(${category?.imageUrl})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   };
