@@ -9,7 +9,7 @@ const ContactUs = () => {
       <h1 className='text-3xl font-semibold mb-4'>
         Get in Touch
       </h1>
-      <p>"This feature is on Work"</p>
+      <p>This feature is on Work</p>
 
       <textarea
         className='border rounded-lg p-2 w-64 h-32 resize-none'
