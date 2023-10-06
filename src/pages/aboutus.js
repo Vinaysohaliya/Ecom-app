@@ -20,7 +20,13 @@ const AboutUsPage = () => {
         </div>
 
         <div className="md:w-1/2">
-          <Image src="/about-us-image.jpg" alt="Our Team" className="rounded-md" />
+          <Image
+            src="/about-us-image.jpg"
+            alt="Our Team"
+            className="rounded-md"
+            width={400} 
+            height={300}
+          />
         </div>
       </section>
 
@@ -34,7 +40,7 @@ const AboutUsPage = () => {
         </ul>
       </section>
 
-     
+
     </div>
   );
 };

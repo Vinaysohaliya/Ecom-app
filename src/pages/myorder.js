@@ -34,8 +34,9 @@ function Order() {
               <ul>
                 {order.products.map((product) => (
                   <li key={product._id}>
-                  <p>{product.name}</p>
-                  <Image alt='img' src={product.imageUrl}></Image>
+                    <p>{product.name}</p>
+                    <Image width={400}
+                      height={300} alt='img' src={product.imageUrl}></Image>
                   </li>
                 ))}
               </ul>

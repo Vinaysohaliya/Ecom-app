@@ -11,6 +11,8 @@ const SearchCard = ({ product }) => {
             src="https://preview.colorlib.com/theme/capitalshop/assets/img/gallery/latest4.jpg"
             alt={product.name}
             className="w-10 h-fit object-cover  rounded"
+            width={400} 
+            height={300}
           />
           <div>
             <h2 className="m-3 font-semibold text-gray-800 mb-2">
