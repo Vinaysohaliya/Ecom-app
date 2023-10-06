@@ -1,4 +1,4 @@
-import connectDB from '../api/backend/db';
+import connectDB from '../api/auth/db/user.db';
 import Product from '../api/backend/product.model';
 import middleware from './auth/middleware/auth';
 

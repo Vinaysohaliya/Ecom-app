@@ -1,4 +1,4 @@
-import connectToDatabase from './backend/db';
+import connectToDatabase from './auth/db/user.db';
 import Product from './backend/product.model';
 
 connectToDatabase();

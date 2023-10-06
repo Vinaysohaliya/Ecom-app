@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import connectToDatabase from './db'; 
+import connectToDatabase from '../auth/db/user.db'; 
 import Product from './product.model'; 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
