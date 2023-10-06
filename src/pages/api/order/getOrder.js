@@ -1,4 +1,4 @@
-import dbConnect from '../backend/db';
+import dbConnect from '../auth/db/user.db';
 import jwt  from 'jsonwebtoken';
 import Order from '../model/order.model';
 

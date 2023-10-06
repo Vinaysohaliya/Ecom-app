@@ -1,4 +1,4 @@
-import connectToDatabase from './db'; 
+import connectToDatabase from '../auth/db//user.db'; 
 import Product from './product.model'; 
 
 // Connect to MongoDB
