@@ -3,7 +3,7 @@ import Product from './backend/product.model';
 
 connectToDatabase();
 
-export default async (req, res) => {
+const handler= async (req, res) => {
     const { category, subcategory, sortBy } = req.query;
     console.log(category,subcategory,sortBy);
     let sortOption = {};
@@ -36,3 +36,5 @@ export default async (req, res) => {
         res.status(405).json({ message: 'Method not allowed' });
     }
 };
+
+export default handler;

@@ -4,7 +4,7 @@ import middleware from './auth/middleware/auth';
 
 connectDB();
 
-export default async (req, res) => {
+ const handler= async  (req, res) => {
   if (req.method === 'GET') {
     middleware(req, res, async () => {
       const { category } = req.query;
@@ -19,3 +19,5 @@ export default async (req, res) => {
     });
   }
 };
+
+export default handler;

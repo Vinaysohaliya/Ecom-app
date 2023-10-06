@@ -2,7 +2,7 @@ import Order from '../model/order.model';
 import { v4 as uuidv4 } from 'uuid';
 
 
-export default async (req, res) => {
+const handler= async (req, res) => {
   try {
     const { amount, cart,userId } = req.body;
   
@@ -36,3 +36,5 @@ export default async (req, res) => {
     res.status(500).json({ error: 'An error occurred while creating the order.' });
   }
 };
+
+export default handler;

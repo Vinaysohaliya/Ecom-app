@@ -6,7 +6,7 @@ import { serialize } from 'cookie';
 
 connectUserDB(); // Connect to the MongoDB database
 
-export default async (req, res) => {
+const handler= async (req, res) => {
   if (req.method === 'POST') {
     try {
       const { email, password } = req.body;
@@ -52,3 +52,6 @@ export default async (req, res) => {
     res.status(405).json({ message: 'Method not allowed' });
   }
 };
+
+
+export default handler;

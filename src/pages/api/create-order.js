@@ -1,6 +1,6 @@
 import razorpay from 'razorpay';
 
-export default async (req, res) => {
+const handler= async (req, res) => {
   try {
     const { amount, currency } = req.body;
     const razorpayInstance = new razorpay({
@@ -19,3 +19,5 @@ export default async (req, res) => {
     res.status(500).json({ error: 'An error occurred while creating the order.' });
   }
 };
+
+export default handler;

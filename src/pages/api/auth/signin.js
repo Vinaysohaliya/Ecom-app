@@ -4,7 +4,7 @@ import { serialize } from 'cookie';
 import jwt from 'jsonwebtoken';
 
 
-export default async (req, res) => {
+const handler= async (req, res) => {
   try {
     if (req.method !== 'POST') {
       return res.status(405).json({ message: 'Method not allowed' });
@@ -50,3 +50,6 @@ export default async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+
+export default handler;
