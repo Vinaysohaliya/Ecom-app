@@ -20,6 +20,7 @@ const cartSlice = createSlice({
         subcategory:product.subcategory,
         name:product.name,
         description:product.description,
+        imageUrl:product.imageUrl,
       }));
     },
     removeFromCart: (state, action) => {

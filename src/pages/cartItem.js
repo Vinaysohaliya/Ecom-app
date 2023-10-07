@@ -10,6 +10,8 @@ function Cart() {
   const carttotal = useSelector((state) => state.cart.total);
   const dispatch = useDispatch();
 
+  console.log(cart);
+
   useEffect(() => {
     dispatch(fetchCartData());
   }, [dispatch]);
@@ -39,9 +41,12 @@ function Cart() {
 
 
 
+
+
       {cart &&
         cart.map((product) => (
           <div key={product.productId} className="bg-white p-4  ">
+          
             <CartCard product={product} />
 
           </div>

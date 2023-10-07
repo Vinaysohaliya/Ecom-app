@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 
 
 const CartCard = ({ product }) => {
+    console.log(product);
     const dispatch = useDispatch();
     const handleRemove = async (productId) => {
         try {
@@ -22,7 +23,6 @@ const CartCard = ({ product }) => {
         <div className='flex items-center justify-evenly w-full '>
             <div>
                 <div className='py-10'>
-                    <div>{product.imageUrl}</div>
                     <div>{product.name}</div>
                 </div>
             </div>

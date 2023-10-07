@@ -4,7 +4,7 @@ import React from 'react';
 
 
 const ProductCard = ({ product }) => {
-
+console.log("PPPPPPPPPPPP"+product);
   return (
     <div className="product-card w-56 mx-2">
       <Image width={400}
