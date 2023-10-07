@@ -1,6 +1,7 @@
 import React from 'react';
 
 const CategoryCard = ({ category }) => {
+  console.log(category);
   const cardStyle = {
     backgroundImage: `url(${category.imageUrl})`,
     backgroundSize: 'cover',

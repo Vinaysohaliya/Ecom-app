@@ -8,16 +8,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 
 const ProductDetailCard = ({ product, productId }) => {
-    const products = {
-        name: 'Product Name',
-        category: 'Electronics',
-        images: [
-            'https://preview.colorlib.com/theme/capitalshop/assets/img/gallery/latest7.jpg',
-            'https://preview.colorlib.com/theme/capitalshop/assets/img/gallery/latest7.jpg',
-            'https://preview.colorlib.com/theme/capitalshop/assets/img/gallery/latest7.jpg',
-            'https://preview.colorlib.com/theme/capitalshop/assets/img/gallery/latest7.jpg',
-        ]
-    };
+   
 
     let userid = null;
 
@@ -49,19 +40,7 @@ const ProductDetailCard = ({ product, productId }) => {
         <div className="bg-gray-100 shadow-lg p-4  px-40 mx-28 my-14">
             <div className="flex flex-col md:flex-row justify-center md:justify-between items-center">
                 <div className="md:w-1/3 mx-auto md:mx-0 ">
-                    <Carousel showStatus={false} showIndicators={false} infiniteLoop={true}>
-                        {products.images.map((image, index) => (
-                            <div key={index} className="h-48 w-64 md:w-96">
-                                <Image
-                                    src={product.imageUrl}
-                                    alt={`Product Image ${index}`}
-                                    className="h-full w-full object-cover"
-                                    width={400}
-                                    height={300}
-                                />
-                            </div>
-                        ))}
-                    </Carousel>
+                    <Image src={product.imageUrl} width={300} height={200}/>
                 </div>
                 <div className="text-center md:text-left md:w-1/2">
                     <h1 className="text-3xl font-semibold">{product.name}</h1>
